@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ManiBeauty</title>
+<style>
+    /* --- Базовые стили --- */
+    html {
+        scroll-behavior: smooth; /* плавная прокрутка */
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #fff5fb;
+    }
+
+    /* --- Шапка --- */
+    header {
+        position: fixed; /* закрепляем шапку */
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between; /* левый блок + иконка справа */
+        align-items: center;
+        padding: 20px;
+        background: #ffecf6;
+        border-bottom: 2px solid #ffb8d9;
+        box-sizing: border-box;
+    }
+
+    /* Левая часть: логотип + меню */
+    .left-block {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+
+    header .logo {
+        font-size: 28px;
+        color: #d6006e;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    /* Меню */
+    .menu a {
+        text-decoration: none;
+        color: #d6006e;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    .menu a:hover {
+        background: #ffd6e9;
+    }
+
+    /* Иконка Instagram */
+    header .insta-icon {
+        display: block;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+
+    header .insta-icon img {
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: 28px;
+        color: #d6006e;
+    }
+
+    /* --- Контейнер контента --- */
+    .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 100px 20px 20px 20px; /* отступ сверху под фиксированную шапку */
+        text-align: center;
+    }
+
+    /* --- Секции --- */
+    section {
+        padding: 30px 0;
+    }
+
+    h2 {
+        font-size: 28px;
+        color: #e03e63;
+        margin-bottom: 20px;
+    }
+
+    /* --- Услуги --- */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .service-card {
+        background: #fff5f8;
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .service-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .service-card h3 {
+        margin: 10px 0 5px;
+        color: #d6006e;
+    }
+
+    .service-card p {
+        font-size: 14px;
+        color: #333;
+    }
+
+    .service-card .price {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #e03e63;
+    }
+
+    .service-card:hover {
+        transform: scale(1.03);
+    }
+
+    /* --- Портфолио --- */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .work-item {
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        transition: 0.3s;
+    }
+
+    .work-item img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        display: block;
+        transition: 0.3s;
+    }
+
+    .work-item:hover {
+        transform: scale(1.03);
+    }
+
+    .work-item:hover img {
+        opacity: 0.9;
+    }
+
+    /* --- Отзывы --- */
+    .reviews {
+        background: #f5f8fc;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .reviews-subtitle {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 40px;
+    }
+
+    .reviews-grid {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .review-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        padding: 20px;
+        max-width: 300px;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .review-card img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 15px;
+    }
+
+    .review-card p {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .review-card h4 {
+        font-size: 16px;
+        color: #d6006e;
+        margin: 0;
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    /* --- Контакты --- */
+    .contacts {
+        margin-top: 40px;
+        background: #ffe3f1;
+        padding: 20px;
+        border-radius: 10px;
+        border: 2px solid #ffb8d9;
+    }
+
+    .contacts .insta-iconcon {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .contacts .insta-iconcon img {
+        width: 100%;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .contacts a {
+        text-decoration: none;
+        color: #d6006e;
+        margin-left: 5px;
+    }
+
+    .contacts a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<a id="home" ></a>
+
+<!-- Шапка -->
+<header>
+    <div class="left-block">
+        <h1><a href="#home" class="logo">ManiBeauty</a></h1>
+
+        <nav class="menu">
+            <a href="#home">Головна</a>
+            <a href="#home">Про нас</a>
+        </nav>
+    </div>
+
+    <a class="insta-icon" href="#" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"/>
+    </a>
+</header>
+
+<div class="container">
+
+    <!-- Секция "Про нас" -->
+    <section>
+        <h2>Про нас</h2>
+        <p> висока якість послуг.</p>
+    </section>
+
+    <!-- Услуги -->
+    <section class="services">
+        <h2>Наші послуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="https://i.pinimg.com/736x/b2/a5/e5/b2a5e5798407b1c15b0a0936d7524137.jpg" alt="Манікюр">
+                <h3>Манікюр</h3>
+                <p>Апаратний, комбінований, класичний. Надання форми нігтям та догляд.</p>
+                <span class="price">від 300 грн</span>
+            </div>
+
+            <div class="service-card">
+                <img src="data:image/jpeg;base64,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" alt="Гель-лак">
+                <h3>Покриття гель-лаком</h3>
+                <p>Покриття, зняття старого матеріалу, вирівнювання та зміцнення.</p>
+                <span class="price">580-1000 грн</span>
+            </div>
+
+            <div class="service-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNEny2xR-9IzEzIT-C6w7xWcwjeuRT-fpj-ljVMybj6xLKLJSw6F94wKFittrK9wkOBxH4c8ICzg7QbYXbJcB2-U5_84EhtZG7UEYTX64C&s=10" alt="Нарощення нігтів">
+                <h3>Нарощення нігтів</h3>
+                <p>Моделювання, зміцнення, робота з формою та довжиною.</p>
+                <span class="price">1100-1960 грн</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфоліо -->
+    <section class="portfolio">
+        <h2>Наші роботи</h2>
+        <div class="portfolio-grid">
+            <div class="work-item">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAQEBUQEBAVFRUQEBUVFRUQDw8VDxUQFRUWFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMsNygtLisBCgoKDg0OGhAQFy0fHSUtLSstLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0rLS0tLS0tLTctLS0rLf/AABEIAKMBNQMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAABAAIEBQYDBwj/xAA5EAACAQMBBQUGBQMEAwAAAAAAAQIDBBEhBRIxQVEGE2FxgSIykaGxwUJSctHwM2LhFCOi8YKSsv/EABkBAAMBAQEAAAAAAAAAAAAAAAABAgMEBf/EACMRAQEAAgMBAQABBQEAAAAAAAABAhEDITESQVETIkJhcQT/2gAMAwEAAhEDEQA/ANWhw1BMlCECCAEIEIQEQhACEAQAciAggBEAQAQgEAOQUNCmMHCGyklxYozzwFuRUxt8h6EAQ9l4chJgEBHCAEAOQCAAHIsgyRLvaEKejeX0X3C3SpjbdRMOF5dRpR3pei5tletptvkl4CureNZJuTyuGGZ3k/h0Y/8Amu/7kGntae/vN8Xw5Y6F9bXKqLK4mYvrF09c5XjxHWF13bWvHp0Ixysrp5OLHLHTTtjWxzeVGWPeWTnk6I86zV0ORZADIiOyIbkAEAgiAEEAQAoQhACEAQgQhCACEaNrVVCLk+CQzPnNRWW8I4Ruk3pw6sz13fyqSzwS4InW1TQyyzv46ePin+S4dRdTvFRaINCWeJOpYM95Nbhhrw1rBDvb9Q9lay+SLGrTzHR4eNDGOUo1JRn7ylhl3k6ZY8E3v8XVOtvat5fiTaUvEp7eoWEKhn6388WEWh7iRqTJ1MuXTPLGZeuIshqxwxmTaXccmWOro/IsjciyNJ2RDclJt/bKpp04P2mtX0QW6VjjcrqHbb20qa3KbzLm1+H/ACZd3jby2RXNyecgngxt27+LCYRZW9yXthcrGrx9DMWzLO0qYJbztf3koyhh8GilsbZuafHHD7Dq1zKTUFz+hc7Ot92OX6eXXzLwm3Pz8nzNRLgmlhvP85AbC2MbNnAORZGiEByEZkIEeIQQBIQggCEIQAgSeNWOM5tDaW/VdNe7B485c2TldReGH1dLp3S4LUk27UuJSwmtMdCytNEZXLKuycWEibKh0+ZQ9o6uIxh1evoaSkZztvZy7vvYcaerXWPP1D7ukTin1LFNRSZZ25R2VwpxUlzRZW9YW2lml1RkT6MiooTLChMC2sqZlu1ls4TjWXCXsy8+MX9V8DTUagzadpGvSlTl+JfB8mvXAqePVY22rFlQqmepScJOE/eg3F+aLGhWZMaWL+hVRY0amTPUauhY0K+OZSNLOqso4HSnWTQ2quZfHl3pjzYbmzRAyc7iuqcXOXCKybOVA27tRUIYT9uXDwXUwdxcOTy3xO+1L91ZuT58PBFdUMrdu7iw+Yk0pnSUiJTkdlIltHelUwT6NYq0yx2RbOrUUFw4vwjzFo7lJN1oNiWeV3klo+Hiv2LtsZFJJJcEsLyE2dEmo8zPL6y2TY3Imxo0HZBkGQZAzhDciESQIGRABCAIAQBAAI8/tpNzb/uf1N/LgeeU24zafJv6kZNuKtFazLi2kUFpU4F1aTM7HR9Lq3YNo0FODj1TQy3kS3qhDbx+0k6Fepby5Sbj5PkXNGphkXt/YunWjXj1w/tn+cxtpX34qS5oF3toLeoWVCqUNpULSjMAt7esWEXlFDb1Szt6pNPTH9sbfuq8aq4VfZl+tLKfqv8A5IltcGn7XWXf200veit6P6o6peuq9Tz/AGdd5SE0ncaeNboSKVZrmU9vVJ9N8xp0vLW56llF6FDbtFxa1E0LWjp5mO2d/uqNJPjq/LkaiqsLJ5ft29dWvKXLOF5I2+94uScOs/8ASLKYt7Jx3x0WS6du0Ud4nOmjrFAez4xy0lzZtth7P7mnr70tX4eBT9mdnZffTWi93z6mnbNcMf1x8/Jv+2C2DI1sa2W5zmwNjcgyAOyLIzIsgZ+RDGxASSFMZkWRB0TCMTCmAPyAQBAcmN7S2nd1t9cKmvrzNg2YrtHe95U04Q0X3Fk04/SsqxfWdYyVtU1L+xrcDOumNJb1cFlRmZ+lVLC2uCV+q/tfYKrRkvA882RV3c03yZ6xdpTi/FHlu2rZ0a7a65CGt7WphlvTqLGhmbevlJos7e40wI9LiFbUsbaq/AoqM8/zmWFvN54k1UXTllY+55ht6wdrcPC9ib3o9FnXHxyeiW9XTDIfaPZSuaTS95ZcX49PoE6Vpi7WvwLWnWM5buUJOEtHF4a8UWUKpQ9XtC46lha3WOZlo18a/BFrY21aprlRDVqvmRp4XCa4mA7X7N7qs5xXsVdV0UvxL7+pqJ7OuaS3k1NcWo53+uiZy2jQV3bSSXtx9qPXeXL11XqHl7K49bjzyJ2pvUSgdIUzTTDaRBlhseydepu/hWsn4dCBSg20kuJudj2So00ub1fmVjNs+Tk1E6nBRSjFYSQnIDYxs0ch+RuRuRZAhyLI3IMgDmwZBkGQB4hmRAe0wQ3IREIcjSp2/ebijBP38t+S/wCxVWM3dJVfaS4Q18eXoRK17U/MyvtJZJ0qeUY211TDGTxW3e2a0U1vZRnbu83uWC72jRM1ewww2qYxIs7jOhd2NYx9ObjMvbS4ykx041lGqTaFfh/EUVncJrUn0Za+H8/Ymqi9t6+dGZvtdYby31xRcUZ/zwOl9T36bT6fEmG82oz3ZY5P6lnbVNSJd0d2bg+uUGhUKKfw0VvPJYU2UtpUJsa+APGbq2hMn288pp8ijo10WlvUTWf5ghqyXbPZ+5UVxBaPSeOvJ/b4FPRq5wbvbdNSptNZT4rw5mBnRdKo4Phxi+seRWI/Uyi81cdEsebNRYVcaGQpT/3fNIv7GrhmkLLutnZ3G8t2T8nzi/28CJf2bhLvYrGuKkfPhI42dQuYy3oa8sRfjF8G/Jr6Ds30iX5vTzLtDY91Xe77tT2168V8fqQI0zVdsLbG5pwbS8mk0UdnaupNRXr5CjPO6WXZ2wy+8ktFw8zSORxowUIqK4JDsmsmnFllu7OyBsa2DI0nNgyNchrkAdMjcjHIGQDpkWTnkdkAcIbkQBNCNTCICZztdFp058tY+rw19GaJMh7Yte9oyjz4r9S1FfFY3VZ6wmXNOosGXta2HjoWlO60RjXZEy6pqS4Gb2nZPoaShUyzpd2qlHgTtWnnFSn7XkSbduL8C32hY4fAq3HDwyoWlraVi7tquiMvbywXFpVDSo0NrULCNRNYKK3qFgqoj0zXaW19reXmimoVc6+PwfM1m3EpLPPGpjJLcqtcpfVfz5DGlxb1jo68nLditX8iJbPn0RM2PhtyfPX05Brasbpa2eyak8PvMP5EidO4tXmazD8yzheaLCxqF7JqcE2k01uyWNM+XivoyrjKf9Sy9qGNRVYY8MGTv7bfjj8dNvH3Rpri0/01Vbv9Ob0/tf5fLoVe1aahUzynqvPmZzrpWX8xmaM02nw5PPLx+Jb2lR514orb+liW/HnxXj1JdhLvI7y4x0kueOTLiLWqsauhfbPmno+Elh+vP0eH6GQ2fWL+0rY1KTe4Z2ws5TtoVMa0Krpz/TLWD9G3H1RU7Ett2O+1q+Hkeh07FV7acZcK8MPwaS3Z465Sfp4mM7tw9hrDjo10a0Zfz3txZ8m+jmxuQNjHIpls9yG7xzbBvAHTIMjMiyAPbBkaFADg5ONe4jBZkzGdoe1XGFN/shybDVXW2qVN4b+YDyK4vJze9KTbCV8lt7zkKYxDkzMzshyMCmAZvtFsvDdamtH76XL+4prevyZvWZXbuxXDNWkvZ4yivw+K8CMo34+T8p1pV8SfG56szdtcYJSuTPTrx7Sr/DKK6pJlmk6kt1PCXHr5I71djxa4fMcxtO6nTNxqYeJej/csLaoMvtmTiuGV8yJZzx7L5cOo9J00dG4wjpTuZVHuw5cWVNOejfRFhsOqlHxeGKY7q/IlXWx6ko7ym214aIye0oSTxNYaej5No9Ls6+MNf4a5p9UU/avY0ZR7yC9mXxjLpn6P/Jep+J+rvtkrGrmPmvmTNkVsJeWPmU9lJwnKnLitV4onWz3W/CWfRknpsbCqaTZ00/Zb0l8nyf8AOTZjNn1uBpbKrwDZ63E6+tVUpuMuKfqtdH6P6mX27TzQUucJL9jazaaU+TW7Lzxx+/oZftVT3KX63/yjJJ/Z+orj3spl1qsi8Najtnf7dTK4Pj9jmFS0HGdvTV0LalPXGG/y6Fzb1rShiVSSXTeeZPyjz9EYJ7WqYUIaePP06FlsnZz/AKtXVvXXV+pbmytk7rcvtPHjSpNrrN7vrjX7FFfXPeVJVGkt55aXDONTjKZwnMtifKZzchjkDIA/eFkZkOQB+QjUEAciHtHaUKMW29SFtnbcKMXrqedbW2vOvJ5enQqQtrDbvaOdVtReEZ2cxrY1spJ2RDExDD6EDkYHJis/IsjN4WQB+QNjMiyAZvbux9zNWktOMorl4x/YpKVXU3s1lNPmYna1k6VR9HqmTcXTxcuuqNvcOFR+Lyi/tLxSMq5Z48VwZ3s7txevImOje+2zUITWqK+47ORqySjpJ+7JcVLlnqjnZX2TWdnaW9JVJaKPDPlq/Ic7TnlqbYGtY1KM3Sqx3ZY9Guq8CPs+e48dHj9jWduO0ULiO7RpxapvPevO/LHHc6RxnV8TF1KntKS4S+vIXW+hhbZ219jWyWcKiacZaxksP7NeKMts258S+pVMoItie0Fm4T30tYN+q5o4W802nnSSx8eD+P3NNtu23lvY48fMzP8AopJ6e7LPpJfuAt6W9jJrR8UabZ9TQz2z4qeN7SWMNr4eppdm7Lm/xrHkw0znLP1eWMspw/MtP1Lh+3qcu1GzHU2dv49qjPvPHcxuy/44f/iWmy9mRjiUnvNcuC+BdVpQcWpY3ZrDUtE88S5iw5OWb6eDyGEza1p3FapSznu5tJ9Y/hfqsP1OmzLB1HvP3V8yNLufTrsbZ+XvyWi4F3OY1tRWFyOUpGkmnPbsZSObYGxo0jkQBAByFAE3hZYA/ewZ/b/aCNKLUXqR+0e3401uxepgLu5lUk5SfEqRO3S/v51Zb0n6ERsa2NUsFkcALGgDZMQRAH0HkWRmRZMVnZFkbkGQB+RZGZFkAemRNp2SrQw+PJkjI5MDjCVqDhJxkuA3u3y/ya/aezY1V0a4My9ehKlLEkRY6MM0nZ1dJ+3D15eqNDtDab/0+5F/1cp4/IsZXrovLJloyJMJvhnRfDUn66VZu7d4oq69Hdbg+HGL8Czgw1qKmsS/ymRK0iHZNvVcVxXXxRfWNxlFDTtp05qSaa58ng0uy5U5PMop+a1NZ2jLk+b2bVpyqezFN56fV9Dnd7KxTUecfrxZf3e2La3ju41/JTS3vXoZe/23UqN7vsRfKOsseMv2wFsiLlln/wAQqDcZa6NMvYdoFSWEt6S5ZxFebM423rl56ttv4jcimXSbju7XN32rvJppVe7i+VJYf/t73zKWvWlN705OT6ybk/ixspE3Z+znN70tI/Ufo6gbNsHUe9L3V8y/WIrC4IasRWFyOcpFyMrdjKRzbE2NGkcgEIAIhAbS4gBbwZjtJt9U04xY/tFt2NOLjF6nn11dOpLek+JUhWldXEpycpPicGxSG5LSWQMLAACMhzGSDGQARAaEAfQDAIRismAQgBCEIAQ4QgByK3bdKLg20IQqc9ZimSaYhGNdcSaZ2YhEqc6g6hVlGMmnjh82IRWPqeTyIsxohCOmtnOTEIqM6sNj0YyeWs68y9ksaIIjWeMMvXGRzYhDSAGIQwAUAQA5FH2hrSitHjQIhwV51tCrKUnl5ILEI0QKGsQgAILEIAaxgRAHRCEIDf/Z" alt="Работа 1">
+            </div>
+            <div class="work-item">
+                <img src="https://froomo.com/image/webpcache/image/cache/catalog/blog/nudovui-manikur-trendu-2023/nyudovyy-manikyur-na-dlinnue-nogti-2-700x700.webp" alt="Работа 2">
+            </div>
+            <div class="work-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSJappUbOaGaHln8XZbBdqXSVMsr6XHTIf-w&s" alt="Работа 3">
+            </div>
+            <div class="work-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Ku2SACuFa_JKHSF8XMTQ2kFv_IyEVVmIZA&s" alt="Работа 4">
+            </div>
+            <div class="work-item">
+                <img src="https://www.womanhit.ru/media/CACHE/images/articleimage2/2024/11/imgonline-com-ua-frame-blurred-h3stgqvpyyo96yp/faca107b95f23cf7cba87730d3cf0a28.jpg" alt="Работа 5">
+            </div>
+            <div class="work-item">
+                <img src="https://www.fashion-woman.com/gallery/manikyur-na-dlinnye-nogti-modnye-idei-dizayna/manikyur-na-dlinnye-nogti-modnye-idei-dizayna_109606uRw.jpg" alt="Работа 6">
+            </div>
+        </div>
+    </section>
+    
+    <!-- Отзывы -->
+    <section class="reviews">
+        <h2>Що говорять наші клієнти</h2>
+        <p class="reviews-subtitle">Ми дякуємо нашим клієнтам за вибір ManiBeauty.</p>
+
+        <div class="reviews-grid">
+            <div class="review-card">
+                <img src="https://media.istockphoto.com/id/1451587807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B7%D0%BD%D0%B0%D1%87%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D0%B0%D0%B2%D0%B0%D1%82%D0%B0%D1%80-%D0%B8%D0%BB%D0%B8-%D0%B7%D0%BD%D0%B0%D1%87%D0%BE%D0%BA-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%D0%B0-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F-%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8F.jpg?s=612x612&w=0&k=20&c=6Wt7tVZi20iTGl7QzOEjzdWznig3MD5IYs9woVB9YoA=" alt="Клієнт 1">
+                <p>Найкраща оцінка роботи майстра! Чудові дизайни та атмосфера.</p>
+                <h4>Олена</h4>
+            </div>
+
+            <div class="review-card">
+                <img src="https://media.istockphoto.com/id/1451587807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B7%D0%BD%D0%B0%D1%87%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D0%B0%D0%B2%D0%B0%D1%82%D0%B0%D1%80-%D0%B8%D0%BB%D0%B8-%D0%B7%D0%BD%D0%B0%D1%87%D0%BE%D0%BA-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%D0%B0-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F-%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8F.jpg?s=612x612&w=0&k=20&c=6Wt7tVZi20iTGl7QzOEjzdWznig3MD5IYs9woVB9YoA=" alt="Клієнт 1">
+            <p>Дуже задоволена послугами студії. Хочеться повертатися!</p>
+                <h4>Дарина</h4>
+            </div>
+            <div class="review-card">
+                <img src="https://media.istockphoto.com/id/1451587807/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80-%D0%B7%D0%BD%D0%B0%D1%87%D0%BA%D0%B0-%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8F-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F-%D0%B0%D0%B2%D0%B0%D1%82%D0%B0%D1%80-%D0%B8%D0%BB%D0%B8-%D0%B7%D0%BD%D0%B0%D1%87%D0%BE%D0%BA-%D1%87%D0%B5%D0%BB%D0%BE%D0%B2%D0%B5%D0%BA%D0%B0-%D1%84%D0%BE%D1%82%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F-%D0%BF%D1%80%D0%BE%D1%84%D0%B8%D0%BB%D1%8F.jpg?s=612x612&w=0&k=20&c=6Wt7tVZi20iTGl7QzOEjzdWznig3MD5IYs9woVB9YoA=" alt="Клієнт 1">
+                <p>Майстри — супер! Завжди топові дизайни та якість.</p>
+                <h4>Марія</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <div class="contacts">
+        <h2>Контакти</h2>
+        <p><b>Телефон:</b> +38 (099) 123-45-67</p>
+        <p><b>Адреса:</b> Луцьк</p>
+        <p>
+            <b>
+                Instagram:
+                <a class="insta-iconcon" href="#" target="_blank">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"/>
+                </a>
+            </b>
+            <a href="#">@manibeauty</a>
+        </p>
+    </div>
+
+</div>
+</body>
+</html>
