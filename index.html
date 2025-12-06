@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Манікюрний салон — Односторінковий</title>
+<style>
+
+/* ---------------------- */
+/* BASE */
+/* ---------------------- */
+:root{
+  --bg:#fff8fb;
+  --accent:#ff7fa8;
+  --accent-2:#d64b73;
+  --soft:#ffdbe8;
+  --muted:#6b4651;
+}
+
+*{ box-sizing:border-box; margin:0; padding:0; }
+
+body{
+  font-family:Inter, Arial, sans-serif;
+  background:var(--bg);
+  color:var(--muted);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------------------- */
+/* NAVBAR */
+/* ---------------------- */
+/* ===== ОСНОВА ===== */
+/* ====== ОСНОВА ====== */
+/* ====== ОСНОВА ====== */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  padding: 10px 20px;
+  background: rgba(255, 240, 246, 0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 180, 200, 0.35);
+  box-shadow: 0 4px 18px rgba(255, 140, 180, 0.18);
+  z-index: 200;
+  transition: 0.3s ease;
+}
+
+/* Лінки (десктоп) */
+.navbar a {
+  position: relative;
+  color: #b03c69;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  padding: 4px 6px;
+  transition: color .3s ease;
+}
+
+/* underline */
+.navbar a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background: #ff4fa3;
+  border-radius: 4px;
+  transition: width .3s ease;
+}
+.navbar a:hover { color: #ff2f90; }
+.navbar a:hover::after { width: 100%; }
+
+/* Instagram icon */
+.instagram-icon img { width: 24px; height: 24px; transition: 0.3s ease; }
+.instagram-icon:hover img { transform: scale(1.12); }
+
+/* ========== БУРГЕР ========== */
+.burger {
+  display: none;               /* скрыт на десктопе */
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 300;
+  background: transparent;
+  border: none;
+  padding: 6px;
+}
+.burger span {
+  width: 28px;
+  height: 3px;
+  background: #b03c69;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+.burger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.burger.active span:nth-child(2) { opacity: 0; }
+.burger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ========== Мобильное меню ========== */
+.mobile-menu {
+  position: fixed;
+  top: 58px;
+  left: 0;
+  right: 0;
+  background: rgba(255, 240, 246, 0.98);
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: 20px 12px;
+  transform: translateY(-120%);
+  transition: transform .35s ease, opacity .25s ease;
+  opacity: 0;
+  z-index: 250;
+}
+.mobile-menu a {
+  font-size: 18px;
+  text-decoration: none;
+  color: #b03c69;
+  font-weight: 600;
+  width: 100%;
+  max-width: 420px;
+}
+.mobile-menu.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* блокировка скролла (класс добавляется скриптом) */
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ========== МЕДИА ========== */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+
+  /* прячем десктопные ссылки (оставляем Instagram + Burger) */
+  .navbar > a { display: none; }
+  .instagram-icon { order: 2; } /* показываем инстаграм отдельно, если нужно можно скрыть тоже */
+
+  .burger { display: flex; }
+}
+/* ---------------------- */
+/* HEADER */
+/* ---------------------- */
+
+
+
+/* ---------------------- */
+/* SECTIONS */
+/* ---------------------- */
+section{
+  max-width:1100px;
+  margin:72px auto;
+  padding:0 18px;
+}
+
+h2{
+  text-align:center;
+  color:#5a2333;
+  margin-bottom:32px;
+}
+
+/* Grids */
+.services, .team, .testimonials, .gallery-container{
+  display:grid;
+  gap:20px;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+}
+
+/* Cards */
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:14px;
+  box-shadow:0 6px 20px rgba(107,70,81,.06);
+  transition:.3s;
+}
+
+.card img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 14px 36px rgba(107,70,81,.12);
+}
+
+/* ---------------------- */
+/* SLIDER */
+/* ---------------------- */
+.services-slider{
+  width:100%;
+  background:#FAEFED;
+  overflow:hidden;
+  padding:40px 0;
+}
+
+.slider-container{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+}
+
+.slider-track{
+  display:flex;
+  gap:22px;
+  transition:transform .5s ease;
+}
+
+.slide{
+  min-width:300px;
+  text-align:center;
+}
+
+.img-wrap{
+  overflow:hidden;
+  border-radius:14px;
+  height:260px;
+}
+
+.img-wrap img{
+  width:110%;
+  height:110%;
+  object-fit:cover;
+  transition:transform .6s ease;
+}
+
+.img-wrap:hover img{
+  transform:scale(1.15);
+}
+
+.slider-btn{
+  position:absolute;
+  top:40%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,0.85);
+  border:none;
+  padding:14px;
+  font-size:24px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.left{ left:-5px; }
+.right{ right:-5px; }
+
+/* ---------------------- */
+/* GALLERY */
+/* ---------------------- */
+.gallery-tabs{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.tab{
+  border:0;
+  background:var(--soft);
+  padding:8px 14px;
+  border-radius:20px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.tab.active{
+  background:var(--accent);
+  color:white;
+}
+
+#lightboxOverlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  background:rgba(0,0,0,.75);
+  z-index:200;
+}
+
+#lightboxOverlay img{
+  max-width:92%;
+  max-height:92%;
+  border-radius:12px;
+}
+
+/* ---------------------- */
+/* BOOKING */
+/* ---------------------- */
+.booking-form{
+  max-width:480px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.booking-form input,
+.booking-form select{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #f1ced7;
+  font-size:1rem;
+}
+#toTopBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 28px;
+  font-weight: bold;
+  background: #ff7fa8;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+#toTopBtn:hover {
+  transform: scale(1.15);
+}
+#toTopBtn.show {
+  display: flex;
+}
+
+
+
+
+</style>
+
+</head>
+
+<button id="toTopBtn">↑</button>
+
+<script>
+                          document.addEventListener("DOMContentLoaded", () => {
+                            const burger = document.getElementById("burgerBtn") || document.querySelector(".burger");
+                            const menu = document.getElementById("mobileMenu");
+
+                            if (!burger || !menu) return; // аккуратно — если чего-то нет, прекращаем
+
+                            function openMenu() {
+                              burger.classList.add("active");
+                              menu.classList.add("show");
+                              menu.setAttribute("aria-hidden", "false");
+                              document.documentElement.classList.add("no-scroll"); // блокируем прокрутку
+                            }
+
+                            function closeMenu() {
+                              burger.classList.remove("active");
+                              menu.classList.remove("show");
+                              menu.setAttribute("aria-hidden", "true");
+                              document.documentElement.classList.remove("no-scroll");
+                            }
+
+                            function toggle() {
+                              if (menu.classList.contains("show")) closeMenu(); else openMenu();
+                            }
+
+                            // клик по бургеру
+                            burger.addEventListener("click", toggle);
+
+                            // закрыть при клике по ссылке в меню
+                            menu.addEventListener("click", (e) => {
+                              const t = e.target;
+                              if (t.tagName.toLowerCase() === "a") closeMenu();
+                            });
+
+                            // закрыть при клике вне меню (по overlay area сверху — здесь просто по esc)
+                            document.addEventListener("keydown", (e) => {
+                              if (e.key === "Escape" && menu.classList.contains("show")) closeMenu();
+                            });
+
+                            // опционально: закрыть меню при ресайзе >768 (если пользователь повернул телефон)
+                            window.addEventListener("resize", () => {
+                              if (window.innerWidth > 768 && menu.classList.contains("show")) closeMenu();
+                            });
+                          });
+</script>
+
+
+<body style="scroll-behavior:smooth">
+
+  <nav class="navbar">
+            <a href="#services">Послуги</a>
+            <a href="#about">Про нас</a>
+            <a href="#works">Наші роботи</a>
+            <a href="#team">Наша команда</a>
+            <a href="#reviews">Відгуки</a>
+            <a href="#booking">Запис</a>
+            <a href="#contacts">Контакти</a>
+
+            <a class="instagram-icon" href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+
+            <!-- BURGER -->
+            <button class="burger" aria-label="Menu" id="burgerBtn" type="button">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </nav>
+
+          <!-- MOBILE MENU (вставить сразу после nav или в конце body) -->
+          <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+            <a href="#services">Послуги</a>
+            <a href="#about">Про нас</a>
+            <a href="#works">Наші роботи</a>
+            <a href="#team">Наша команда</a>
+            <a href="#reviews">Відгуки</a>
+            <a href="#booking">Запис</a>
+            <a href="#contacts">Контакти</a>
+
+            <a class="instagram-icon" href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+            </a>
+          </div>
+
+  
+
+<header class="hero-header">
+
+    <h1 class="hero-title">
+        НАСОЛОДЖУЙТЕСЬ НАЙКРАЩИМ<br>
+        ДОГЛЯДОМ ЗА НІГТЯМИ У ЛУЦЬКУ
+        <span class="hero-sub">( <em>Догляд за нігтями для жінок і чоловіків</em> )</span>
+    </h1>
+
+    <a href="#booking" class="hero-btn">Записатись</a>
+
+    <p class="hero-text">Зробіть свої нігті ідеальними вже зараз!</p>
+</header>
+
+<style>
+.hero-header {
+    position: relative;
+    padding: 160px 20px 140px;
+    text-align: center;
+    color: #240a0a;
+
+  
+}
+ background-image: url("https://www.ua-region.com.ua/firms/photo/2306318526/letual-2306318526.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+.hero-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 0;
+}
+
+.hero-header > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Кнопка */
+.hero-btn {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    padding: 16px 38px;
+    background: linear-gradient(135deg, #ff91c9, #ff66a3);
+    color: #fff;
+
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 40px;
+    text-decoration: none;
+
+    box-shadow: 0 8px 22px rgba(255, 102, 163, 0.35);
+    transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+    background: linear-gradient(135deg, #ff66a3, #ff91c9);
+    transform: translateX(-50%) scale(1.06);
+    box-shadow: 0 12px 28px rgba(255, 102, 163, 0.45);
+}
+
+/* Текст */
+.hero-title {
+    font-size: 46px;
+    line-height: 1.3;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.35);
+}
+
+.hero-text {
+    margin-top: 22px;
+    font-size: 20px;
+    color: #ffb6c9;
+}
+
+
+/* ======================
+      А Д А П Т И В Н І С Т Ь
+====================== */
+
+/* Планшеты */
+@media (max-width: 992px) {
+    .hero-header { padding: 120px 20px 160px; }
+    .hero-title { font-size: 38px; }
+    .hero-btn { bottom: 60px; font-size: 16px; padding: 14px 30px; }
+    .hero-text { font-size: 18px; }
+}
+
+/* Телефоны */
+@media (max-width: 768px) {
+    .hero-header { padding: 100px 15px 150px; }
+    .hero-title { font-size: 32px; }
+    .hero-btn { bottom: 50px; padding: 12px 26px; font-size: 15px; }
+    .hero-text { font-size: 16px; }
+}
+
+/* Маленькие телефоны */
+@media (max-width: 480px) {
+    .hero-header { padding: 80px 12px 140px; }
+    .hero-title { font-size: 26px; }
+    .hero-btn { bottom: 40px; padding: 10px 22px; }
+    .hero-text { font-size: 14px; }
+}
+
+/* Очень маленькие (360px) */
+@media (max-width: 360px) {
+    .hero-title { font-size: 22px; }
+    .hero-btn { bottom: 35px; }
+    .hero-text { font-size: 13px; }
+}
+
+</style>
+
+
+
+
+<!-- Slider Component with autoslide, parallax, 3D-tilt -->
+<section id="services" class="services-section">
+  
+  <h3 class="services-subtitle">Послуги</h3>
+  <h2 class="services-title">НАШІ ПОСЛУГИ</h2>
+  <h3 class="services-title">для чоловіків та жінок</h3>
+
+  <!-- Слайдер -->
+  <div class="services-wrapper">
+    <span class="nav-arrow" onclick="prevService()">&#10094;</span>
+
+    <div class="service-card smooth" id="service-left"></div>
+    <div class="service-card smooth" id="service-center"></div>
+    <div class="service-card smooth" id="service-right"></div>
+
+    <span class="nav-arrow" onclick="nextService()">&#10095;</span>
+  </div>
+
+  <!-- ⬇️ СЮДИ ВСТАВЛЯЄМО БЛОК "ПОКАЗАТИ ВСІ" -->
+  <div class="show-all-wrapper">
+      <button id="showAllBtn">Показати всі</button>
+  </div>
+
+  <div id="allServices" class="all-services hidden"></div>
+  <!-- ⬆️ КІНЕЦЬ БЛОКУ -->
+
+  <style>
+    .services-section {
+      width: 100vw;
+      max-width: 100%;
+      padding: 60px 20px;
+      background: #f7ebe9;
+      text-align: center;
+      color: #3c2e2e;
+    }
+
+    .services-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: nowrap;
+    }
+
+    /* ------- КАРТОЧКИ ------- */
+    .service-card {
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      padding: 0;
+      width: 300px;
+      height: 800px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* note: don't set justify-content: flex-start — let inner blocks manage spacing */
+      opacity: 0;
+      transform: translateY(15px) scale(0.98);
+      transition: all 0.45s cubic-bezier(.25,.8,.25,1);
+    }
+
+    .service-card.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .service-card img {
+      width: 300px;
+      height: 600px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      background: #f2f2f2;
+    }
+
+    /* Внутрішній блок з текстом */
+    .service-info {
+      flex-grow: 1;        /* розтягується так, щоб ціна завжди вниз */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      text-align: center;
+      gap: 10px;
+      padding: 6px 8px;
+    }
+
+    .service-info h3 {
+      margin: 0;
+      font-size: 18px;
+      color: #4a2d2d;
+    }
+
+    .service-info p {
+      margin: 0;
+      font-size: 14px;
+      color: #6a4b4b;
+      line-height: 1.4;
+    }
+
+    /* Красива підкладка під ціною */
+    .service-price {
+      margin-top: auto;     /* штовхає вниз */
+      padding: 10px 18px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #4a2d2d;
+
+      background: linear-gradient(135deg, #ffdad5, #ffc2b8);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(160,80,90,0.12);
+      display: inline-block;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    /* ------- КНОПКИ ------- */
+    .nav-arrow {
+      font-size: 32px;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      color: #5a2a39;
+    }
+    /* Hover-анімація картки */
+      .service-card {
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+      }
+
+      .service-card:hover {
+          transform: translateY(-10px) scale(1.03);
+          box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+      }
+
+      /* Підсвічування ціни при наведенні на картку */
+      .service-card:hover .service-price {
+          transform: scale(1.06);
+          box-shadow: 0 8px 20px rgba(255,150,150,0.25);
+          transition: all 0.3s ease;
+      }
+              /* Кнопка Показати всі */
+        .show-all-wrapper {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        #showAllBtn {
+            padding: 12px 26px;
+            background: linear-gradient(135deg, #ffdad5, #ffc2b8);
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #4a2d2d;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+            transition: 0.3s ease;
+        }
+
+        #showAllBtn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+        }
+
+                /* Блок зі всіма послугами */
+        .all-services {
+            max-width: 1300px;
+            margin: 40px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr)); /* рівні 3 колонки */
+            gap: 25px;
+            padding: 10px;
+            transition: 0.4s ease;
+            opacity: 1;
+        }
+
+          /* всередині загального списку картки мають бути компактні */
+          .all-services .service-card {
+              width: 100%;
+              height: auto;
+              padding-bottom: 20px;
+              opacity: 1; /* без анімації появи тут */
+              transform: none;
+          }
+
+          .all-services .service-card img {
+              width: 100%;
+              height: 350px;            /* компактна адаптивна висота */
+              border-radius: 10px;
+              object-fit: cover;
+          }
+
+          /* Схований стан */
+          .all-services.hidden {
+              height: 0;
+              opacity: 0;
+              overflow: hidden;
+          }
+
+          /* Адаптив: 2 картки на планшеті */
+          @media (max-width: 900px) {
+              .all-services {
+                  grid-template-columns: repeat(2, 1fr);
+                  gap: 20px;
+              }
+
+              .all-services .service-card img {
+                  height: 300px;
+              }
+          }
+
+          /* Адаптив: 1 картка на телефоні */
+          @media (max-width: 600px) {
+              .all-services {
+                  grid-template-columns: repeat(1, 1fr);
+                  gap: 18px;
+              }
+
+              .all-services .service-card img {
+                  height: 260px;
+              }
+          }
+
+
+    /* ------- МОБІЛЬНИЙ АДАПТИВ ------- */
+    @media (max-width: 900px) {
+      .services-wrapper { gap: 12px; }
+      .service-card { width: 320px; height: 430px; }
+      .service-card img { width: 200px; height: 160px; }
+    }
+
+    @media (max-width: 768px) {
+      #service-left, #service-right { display: none; }
+      .service-card { width: 92%; height: auto; }
+    }
+
+    @media (max-width: 450px) {
+      .services-wrapper { gap: 8px; }
+      .service-card img { width: 140px; height: 120px; }
+    }
+  </style>
+
+  <script>
+    const services = [
+          {
+            title: "Покриття гель-лаком",
+            description: "Класичний або комбінований манікюр з покриттям гель-лаком преміум матеріалів.",
+            price: "600 грн",
+            img: "https://thepilochki.ua/wp-content/uploads/2025/10/d60abb1bbddd3d159e74975415018ab6_cropped_666x444.jpeg"
+          },
+          {
+            title: "Педикюр",
+            description: "Комбінований або апаратний педикюр із SPA-доглядом та поліруванням.",
+            price: "750 грн",
+            img: "https://kika-style.com.ua/image/uploads/manicure/pedikiur-kiev.jpg"
+          },
+          {
+            title: "Нарощування нігтів",
+            description: "Моделювання форми та довжини: гель, гелеві типси, верхні форми.",
+            price: "900 грн",
+            img: "https://staleks.ua/upload/medialibrary/e55/800qrjur2p762b19pitf63a1522w4u9m.png"
+          },
+          {
+            title: "Зняття покриття",
+            description: "Акуратне та безпечне зняття гель-лаку або гелю з доглядом для нігтів.",
+            price: "300 грн",
+            img: "https://img.moyo.ua/img/news_desc/1672/167209_1643369704_4.jpg"
+          },
+          {
+            title: "Чоловічий педикюр",
+            description: "Вирівнювання, догляд та укріплення нігтів для чоловіків.",
+            price: "500 грн",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdwsBIxL484MCdxWbKvN3olddybC_A_Zr9vQ&s"
+          },
+          {
+            title: "Чоловічий манікюр",
+            description: "Охайний та швидкий манікюр для чоловіків — акуратно та природно.",
+            price: "400 грн",
+            img: "https://podocentr.dp.ua/wp-content/uploads/2023/05/IMG_9367.jpg"
+          },
+          {
+            title: "Френч / Омбре",
+            description: "Класичний французький манікюр або плавні градієнти омбре.",
+            price: "700 грн",
+            img: "https://blog.globalfashion.pro/md/articles/ydgw9I6Gs9ZZs4OY4taVsJh74VsBVy1n3wEhahB4.webp"
+          },
+          {
+            title: "Дизайн нігтів",
+            description: "Художній розпис, лінії, аерографія, камінці та трендові дизайни.",
+            price: "150–350 грн",
+            img: "https://blog.eva.ua/wp-content/uploads/2024/02/1_06.jpg"
+          },
+          {
+            title: "Укріплення нігтів",
+            description: "Укріплення гелем або акрил-гелем для довготривалої носки.",
+            price: "250 грн",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGp78p9eLNRDP0vHdFBOO_Z3fAOxEsIC_gw&s"
+          },
+          {
+            title: "Корекція нарощених нігтів",
+            description: "Корекція форми, довжини, архітектури та оновлення покриття.",
+            price: "650 грн",
+            img: "https://lillyshop.pro/images/companies/1/news/korrekciya2.jpg?1651004516517"
+          },
+          {
+            title: "SPA манікюр",
+            description: "Скрабування, маска, масаж та догляд для глибокого зволоження.",
+            price: "450 грн",
+            img: "https://blog.globalfashion.pro/ua/articles/spa-manikiur-2.jpg"
+          },
+          {
+            title: "SPA педикюр",
+            description: "SPA-комплекс із розпарюванням, масажем і спеціальними масками.",
+            price: "850 грн",
+            img: "https://dailybeauty.com.ua/images/blog/25_12_19/spa-pedikur.jpg"
+          },
+          {
+            title: "Масаж рук",
+            description: "Розслаблюючий масаж рук та області кисті, 10–15 хв.",
+            price: "150 грн",
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyAAzpLrM7VTX7rwzqgPxb6ulXf0o8KGBBFQ&s"
+          },
+          {
+            title: "Ламінування нігтів",
+            description: "Відновлення та зміцнення натуральних нігтів спеціальними ламінуючими засобами.",
+            price: "350 грн",
+            img: "https://salon-mria.com/images/photos/medium/article402.jpg"
+          },
+
+          {
+            title: "Набір для стерильності",
+            description: "Індивідуальний одноразовий набір для безпечної процедури.",
+            price: "50 грн",
+            img: "https://content2.rozetka.com.ua/goods/images/big_tile/461104303.jpg"
+          }
+        ];
+
+
+    let serviceIndex = 0;
+
+    // единий шаблон — визначений ДО виклику renderServices
+    function serviceTemplate(s) {
+      return `
+        <img src="${s.img}" alt="${s.title}">
+        <div class="service-info">
+          <h3>${s.title}</h3>
+          <p>${s.description}</p>
+        </div>
+        <div class="service-price">${s.price}</div>
+      `;
+    }
+
+    function renderServices() {
+      const left = services[serviceIndex % services.length];
+      const center = services[(serviceIndex + 1) % services.length];
+      const right = services[(serviceIndex + 2) % services.length];
+
+      const elements = [
+        { el: document.getElementById("service-left"), data: left },
+        { el: document.getElementById("service-center"), data: center },
+        { el: document.getElementById("service-right"), data: right }
+      ];
+
+      elements.forEach(item => item.el.classList.remove("show"));
+
+      setTimeout(() => {
+        elements.forEach(item => {
+          item.el.innerHTML = serviceTemplate(item.data);
+          item.el.classList.add("show");
+        });
+      }, 80);
+    }
+
+    function nextService() {
+      serviceIndex = (serviceIndex + 1) % services.length;
+      renderServices();
+    }
+
+    function prevService() {
+      serviceIndex = (serviceIndex - 1 + services.length) % services.length;
+      renderServices();
+    }
+
+    // викликаємо після визначення шаблону
+    renderServices();
+
+    // Генерація всіх карток
+      function renderAllServices() {
+          const container = document.getElementById("allServices");
+          container.innerHTML = services.map(s => `
+            <div class="service-card show">
+              <img src="${s.img}" alt="${s.title}">
+              <div class="service-info">
+                <h3>${s.title}</h3>
+                <p>${s.description}</p>
+              </div>
+              <div class="service-price">${s.price}</div>
+            </div>
+          `).join("");
+      }
+
+      // Переключення кнопки
+      document.getElementById("showAllBtn").addEventListener("click", () => {
+          const block = document.getElementById("allServices");
+
+          if (block.classList.contains("hidden")) {
+              block.classList.remove("hidden");
+              renderAllServices();
+              showAllBtn.innerText = "Приховати";
+          } else {
+              block.classList.add("hidden");
+              showAllBtn.innerText = "Показати всі";
+          }
+      });
+
+  </script>
+</section>
+
+
+
+
+
+
+
+<section id="about"
+style="width:100vw; max-width:100%; margin:0; height:620px; background:#D8B4B8; padding:40px 0;
+box-sizing:border-box; display:flex; justify-content:center; align-items:center;">
+
+  <div class="about-inner"
+  style="max-width:1200px; width:100%; display:flex; gap:40px; align-items:center; padding:0 20px;">
+
+    <div class="col" style="width:50%; height:420px; overflow:hidden; border-radius:16px;">
+      <img src="https://blog.allo.ua/wp-content/uploads/2020/04/Kak-sdelat-manikyur-doma-Maknikyur2-700x450.jpg"
+      alt="Про нас" style="width:100%; height:100%; object-fit:cover;">
+    </div>
+
+    <div class="col" style="width:50%; color:#3A1C1C;">
+      <h3 style="font-size:20px; margin:0 0 10px; color:#7A1F2A; font-style:italic;">Про нас</h3>
+      <h2 style="font-size:36px; margin:0 0 20px; font-weight:700;">ЛАСКАВО ПРОСИМО ДО BAEUTY!</h2>
+
+      <p style="font-size:16px; line-height:1.6; margin-bottom:15px;">
+        Baeuty — це ідеальне місце для якісного догляду за нігтями та spa-процедур у затишній і комфортній атмосфері.
+      </p>
+
+      <p style="font-size:16px; line-height:1.6; margin-bottom:20px;">
+        Наші сертифіковані майстри завжди в курсі останніх трендів і дбають про кожного клієнта.
+      </p>
+
+      <div class="phone-box" style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
+        <div style="width:45px; height:45px; background:#fff; border-radius:50%;
+        display:flex; justify-content:center; align-items:center; color:#A23A4A; font-size:20px;">
+          ☎
+        </div>
+        <div style="font-size:18px;">+1 (234) 567 89 00</div>
+      </div>
+    </div>
+
+  </div>
+  <a id="works"></a>
+</section>
+<style>
+      /* ------- АДАПТАЦИЯ "ПРО НАС" ------- */
+
+      /* БАЗА — уже есть в HTML (inline), только дополняем адаптивом */
+
+      /* ——— Планшеты (до 992px) ——— */
+      @media (max-width: 992px) {
+        #about {
+          height: auto !important;
+          padding: 50px 0 !important;
+        }
+
+        #about .about-inner {
+          gap: 30px !important;
+        }
+
+        #about .col h2 {
+          font-size: 30px !important;
+        }
+
+        #about .col p {
+          font-size: 15px !important;
+        }
+      }
+
+      /* ——— Телефоны (до 768px) ——— */
+      @media (max-width: 768px) {
+        #about .about-inner {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        #about .col {
+          width: 100% !important;
+        }
+
+        #about .col:first-child {
+          height: 320px !important;
+        }
+
+        #about .phone-box {
+          justify-content: center;
+        }
+
+        #about .col h2 {
+          font-size: 28px !important;
+        }
+      }
+
+      /* ——— Маленькие телефоны (до 480px) ——— */
+      @media (max-width: 480px) {
+        #about {
+          padding: 35px 0 !important;
+        }
+
+        #about .col:first-child {
+          height: 260px !important;
+        }
+
+        #about .col h2 {
+          font-size: 24px !important;
+        }
+
+        #about .col h3 {
+          font-size: 18px !important;
+        }
+
+        #about .col p {
+          font-size: 14px !important;
+        }
+
+        #about .phone-box div:last-child {
+          font-size: 16px !important;
+        }
+      }
+</style>
+
+
+
+
+  
+<section>
+  <h2>Наші роботи</h2>
+
+  <div class="works-gallery">
+    <img src="https://lillyshop.pro/images/companies/1/news/korrekciya2.jpg?1651004516517" onclick="openWork(this)">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnGp78p9eLNRDP0vHdFBOO_Z3fAOxEsIC_gw&s" onclick="openWork(this)">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdwsBIxL484MCdxWbKvN3olddybC_A_Zr9vQ&s" onclick="openWork(this)">
+    <img src="https://staleks.ua/upload/medialibrary/e55/800qrjur2p762b19pitf63a1522w4u9m.png" onclick="openWork(this)">
+    <img src="https://img-1.kwcdn.com/product/fancy/aad6f96b-39f9-460d-8f7c-87b3bb5323d7.jpg?imageView2/2/w/800/q/70/format/avif" onclick="openWork(this)">
+    <img src="https://imkosmetik.com/journal/wp-content/uploads/2017/10/%D1%88%D0%BA%D0%B3%D1%80%D0%BE%D1%88%D0%B5%D0%BF%D0%BA%D1%80%D0%B8%D1%82%D0%B5%D0%B0%D0%BF%D0%BE%D1%82%D0%BF-598x480.jpg" onclick="openWork(this)">
+    <img src="https://www.tufishop.com.ua/images/watermarked/1/detailed/104/manikyur-cvetnoy-french-raznocvetnyy.jpg" onclick="openWork(this)">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSMTuorBzy7uYaFLOU7hTSNZsZMahU6lQjKA&s" onclick="openWork(this)">
+  </div>
+
+  <!-- Modal for images -->
+  <div id="workModal" class="work-modal">
+    <span class="work-close" onclick="closeWork()">&times;</span>
+    <img id="workModalImg" class="work-modal-img">
+  </div>
+  <style>#works {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+#works h2 {
+  color: #0055a5;
+  font-size: 32px;
+  margin-bottom: 25px;
+}
+
+.works-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.works-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.works-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* MODAL */
+.work-modal {
+  display: none;
+  position: fixed;
+  z-index: 3000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  align-items: center;
+  justify-content: center;
+}
+
+.work-modal-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 4px 22px rgba(255,255,255,0.3);
+}
+
+.work-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 45px;
+  color: white;
+  cursor: pointer;
+}
+</style>
+
+
+<script>
+  function openWork(img) {
+    document.getElementById("workModal").style.display = "flex";
+    document.getElementById("workModalImg").src = img.src;
+  }
+
+  function closeWork() {
+    document.getElementById("workModal").style.display = "none";
+  }
+</script>
+
+</section>
+
+
+
+
+
+
+<style>
+/* TEAM — Адаптация */
+@media (max-width: 1024px) {
+  #team-block h2 {
+    font-size: 34px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  #team-block {
+    padding: 50px 20px !important;
+  }
+
+  #team-block h2 {
+    font-size: 28px !important;
+  }
+
+  #team-block h3 {
+    font-size: 20px !important;
+  }
+
+  #team-block p {
+    font-size: 15px !important;
+  }
+
+  /* Карточки мастеров по одной */
+  #team-block .team-cards {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+
+  #team-block .team-card {
+    width: 100% !important;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  /* Нижние 2 блока */
+  #team-block .bottom-boxes {
+    flex-direction: column !important;
+    gap: 25px !important;
+    margin-top: 40px !important;
+  }
+
+  #team-block .bottom-box {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 480px) {
+  #team-block h2 {
+    font-size: 24px !important;
+  }
+
+  #team-block .team-card img {
+    height: 280px !important;
+    object-fit: cover;
+  }
+
+  #team-block .bottom-box {
+    padding: 20px !important;
+  }
+}
+</style>
+
+
+<!-- TEAM BLOCK -->
+<section id="team" style="width:100vw;max-width:100%; background:#F3D3D3; padding:80px 0; text-align:center;">
+
+    <h3 style="font-size:22px; font-style:italic; color:#A25A6D; margin-bottom:10px;">Команда</h3>
+    <h2 style="font-size:40px; color:#2C1839; margin-bottom:30px;">МАЙСТРИ НІГТЬОВОГО СЕРВІСУ</h2>
+
+    <p style="max-width:700px; margin:0 auto 50px; color:#5A3A3A; font-size:16px;">
+      Наші феї манікюру та педикюру зроблять ваш досвід ідеальним.
+    </p>
+
+    <!-- TEAM CARDS -->
+    <div class="team-cards" style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+
+        <div class="team-card" style="width:280px; text-align:center;">
+            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=900" 
+                style="width:100%; border-radius:12px; margin-bottom:15px;">
+            <h4 style="font-size:20px; margin-bottom:5px;">Kim McBride</h4>
+            <p style="font-size:14px; color:#7A5A5A;">Власниця & Адміністратор</p>
+        </div>
+
+        <div class="team-card" style="width:280px; text-align:center;">
+            <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900"
+                style="width:100%; border-radius:12px; margin-bottom:15px;">
+            <h4 style="font-size:20px; margin-bottom:5px;">Daisy Sullivan</h4>
+            <p style="font-size:14px; color:#7A5A5A;">Спеціаліст нігтьового догляду</p>
+        </div>
+
+        <div class="team-card" style="width:280px; text-align:center;">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=900"
+                style="width:100%; border-radius:12px; margin-bottom:15px;">
+            <h4 style="font-size:20px; margin-bottom:5px;">Sofia Nguyen</h4>
+            <p style="font-size:14px; color:#7A5A5A;">Нейл-арт спеціаліст</p>
+        </div>
+
+    </div>
+
+    <!-- BOTTOM TWO BOXES -->
+    <div class="bottom-boxes" style="display:flex; justify-content:center; gap:40px; margin-top:60px; flex-wrap:wrap;">
+
+        <div class="bottom-box" style="width:500px; background:#F9E6E6; border-radius:14px; padding:30px; text-align:left;">
+            <h4 style="font-size:18px; color:#A25A6D; margin-bottom:10px;">Продукція</h4>
+            <h3 style="font-size:26px; color:#2C1839; margin-bottom:20px;">Преміум-продукти для догляду</h3>
+            <p style="font-size:16px; color:#5A3A3A; margin-bottom:15px;">
+              У нас ви знайдете все необхідне для догляду за нігтями.
+            </p>
+        </div>
+
+        <div class="bottom-box" style="width:500px; background:#FFECEC; border-radius:14px; padding:30px; text-align:center;">
+            <h3 style="font-size:36px; color:#8E1F3F; margin-bottom:10px;">50% OFF</h3>
+            <p style="font-size:16px; color:#5A3A3A;">на всі записи до 12/25</p>
+        </div>
+
+    </div>
+<a id="reviews"></a>
+</section>
+
+
+<!--REVIEWS-->
+<section class="reviews-section">
+    <h3 class="reviews-subtitle">Відгуки</h3>
+    <h2 class="reviews-title">НАШІ КЛІЄНТИ ПРО НАС</h2>
+
+    <div class="reviews-wrapper">
+        <span class="nav-arrow" onclick="prevReview()">&#10094;</span>
+
+        <div class="review-card" id="review-left"></div>
+        <div class="review-card" id="review-right"></div>
+
+        <span class="nav-arrow" onclick="nextReview()">&#10095;</span>
+    </div>
+
+
+<style>
+/* Основний стиль */
+.reviews-section {
+    width: 100vw;
+    max-width: 100%;
+    padding: 60px 20px;
+    background: #f7ebe9;
+    text-align: center;
+    color: #3c2e2e;
+}
+
+.reviews-title {
+    font-size: 28px;
+    margin: 10px 0 40px;
+}
+
+.reviews-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.review-card {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 30px;
+    width: 320px;
+    height: 400px;
+}
+
+.review-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.nav-arrow {
+    font-size: 32px;
+    cursor: pointer;
+    user-select: none;
+    padding: 10px;
+}
+
+/* --- АДАПТАЦІЯ --- */
+
+/* Планшети */
+@media (max-width: 900px) {
+    .reviews-wrapper {
+        gap: 20px;
+    }
+}
+
+/* Телефони */
+@media (max-width: 768px) {
+
+    .reviews-title {
+        font-size: 24px;
+    }
+
+    .nav-arrow {
+        font-size: 28px;
+        padding: 5px;
+    }
+
+    /* Стрілки з’являються зверху */
+    .reviews-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .review-card {
+        width: 90%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .review-card img {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Маленькі телефони */
+@media (max-width: 480px) {
+
+    .reviews-title {
+        font-size: 20px;
+    }
+
+    .review-card {
+        width: 100%;
+        padding: 18px;
+    }
+
+    .review-card img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .nav-arrow {
+        font-size: 26px;
+    }
+}
+</style>
+
+
+
+
+<script>
+const reviews = [
+{
+    name: "Jane McCoy",
+    role: "Nail master: Daisy",
+    text: "I enjoyed my visit to Lotus. It's a new, modern, and sterile salon. I felt safe and loved my fresh manicure.",
+    date: "March 22, 2024",
+    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500"
+},
+
+{
+    name: "Laura Bennett",
+    role: "Nail master: Sofia",
+    text: "Beautiful and careful work! My nails look perfect and the salon has a very calming vibe.",
+    date: "May 10, 2024",
+    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500"
+},
+{
+    name: "Emily Carter",
+    role: "Nail master: Lola",
+    text: "Loved the service and the attention to detail. Definitely coming back!",
+    date: "June 4, 2024",
+    img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500"
+},
+{
+    name: "Victoria Hayes",
+    role: "Nail master: Anna",
+    text: "The pedicure was absolutely fantastic. Clean, gentle and relaxing.",
+    date: "July 19, 2024",
+    img: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=500"
+},
+{
+    name: "Chloe Morgan",
+    role: "Nail master: Daisy",
+    text: "Very professional staff and a cozy atmosphere. Love this place!",
+    date: "August 1, 2024",
+    img: "https://images.unsplash.com/photo-1524253482453-3fed8d2fe12b?w=500"
+},
+{
+    name: "Hannah Brooks",
+    role: "Nail master: Lola",
+    text: "Very friendly staff, beautiful interior and perfect nails. Highly recommend!",
+    date: "September 27, 2024",
+    img: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=500"
+},
+{
+    name: "Emma Lewis",
+    role: "Nail master: Anna",
+    text: "Great service and the salon is extremely clean. Loved the experience!",
+    date: "April 13, 2024",
+    img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500"
+},
+
+];
+
+let idx = 0;
+
+function renderReviews() {
+    const left = reviews[idx % reviews.length];
+    const right = reviews[(idx + 1) % reviews.length];
+
+    document.getElementById("review-left").innerHTML = template(left);
+    document.getElementById("review-right").innerHTML = template(right);
+}
+
+function template(r) {
+    return `
+        <img src="${r.img}" alt="">
+        <h3>${r.name}</h3>
+        <p><strong>${r.role}</strong></p>
+        <p>${r.text}</p>
+        <small>${r.date}</small>
+    `;
+}
+
+function nextReview() {
+    idx++;
+    renderReviews();
+}
+
+function prevReview() {
+    idx = idx === 0 ? reviews.length - 1 : idx - 1;
+    renderReviews();
+}
+
+renderReviews();
+</script>
+<a id="booking"></a>
+</section>
+
+ 
+
+
+<!-- ONLINE BOOKING -->
+<section >
+        <h2>Запис онлайн</h2>
+        <div class="booking-box">
+          <p>Запишіться на прийом у зручний для вас час. Ми зв’яжемося з вами протягом 10 хвилин.</p>
+          <button class="booking-btn" onclick="openBooking()">Записатися</button>
+        </div>
+
+        <!-- MODAL -->
+        <div id="bookingModal" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeBooking()">&times;</span>
+            <h3>Онлайн-запис</h3>
+
+            <form class="booking-form">
+
+              <!-- ВИБІР ПОСЛУГИ -->
+              <label>Оберіть послугу:</label>
+              <select required>
+                <option>Покриття гель-лаком</option>
+                <option>Педикюр</option>
+                <option>Нарощування нігтів</option>
+                <option>Зняття покриття</option>
+                <option>Чоловічий педикюр</option>
+                <option>Чоловічий манікюр</option>
+                <option>Френч / Омбре</option>
+                <option>Дизайн нігтів</option>
+                <option>Укріплення нігтів</option>
+                <option>Корекція нарощених нігтів</option>
+                <option>SPA манікюр</option>
+                <option>SPA педикюр</option>
+                <option>Масаж рук</option>
+                <option>Ламінування нігтів</option>
+                <option>Набір для стерильності</option>
+              </select>
+
+              <!-- ІМ'Я -->
+              <label>Ваше ім'я:</label>
+              <input type="text" placeholder="Введіть ваше ім'я" required>
+
+              <!-- ТЕЛЕФОН -->
+              <label>Телефон:</label>
+              <input type="tel" placeholder="+38 (0XX) XXX-XX-XX" required>
+
+              <!-- ДАТА -->
+              <label>Бажана дата:</label>
+              <input type="date" required>
+
+              <!-- ЧАС -->
+              <label>Бажаний час:</label>
+              <input type="time" required>
+
+              <!-- КОМЕНТАР -->
+              <label>Коментар (необов’язково):</label>
+              <textarea placeholder="Опишіть побажання або деталі"></textarea>
+
+              <button type="submit" class="booking-send">Відправити</button>
+            </form>
+          </div>
+        </div>
+
+        <style>
+            #booking {
+              padding: 40px 20px;
+              text-align: center; /* 🔥 Выровнял весь блок */
+            }
+
+            .booking-box {
+              background: #ffffff;
+              padding: 25px;
+              max-width: 500px;
+              margin: auto;
+              border-radius: 14px;
+              box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+              text-align: center; /* 🔥 Текст внутри по центру */
+            }
+
+            .booking-box p {
+              text-align: center; /* 🔥 Центровка описания */
+            }
+
+            .booking-btn {
+              background: #0055a5;
+              color: white;
+              border: none;
+              padding: 12px 28px;
+              font-size: 18px;
+              border-radius: 10px;
+              cursor: pointer;
+              margin-top: 15px;
+              transition: 0.3s;
+              display: inline-block;
+            }
+
+            .booking-btn:hover {
+              background: #003d7a;
+              transform: scale(1.05);
+            }
+
+            /* ==================
+                    MODAL
+            ================== */
+            .modal {
+              display: none;
+              position: fixed;
+              z-index: 2000;
+              padding-top: 80px;
+              left: 0; top: 0;
+              width: 100%; height: 100%;
+              background: rgba(0,0,0,0.4);
+            }
+
+            .modal-content {
+              background: #fff;
+              margin: auto;
+              padding: 20px;
+              border-radius: 12px;
+              width: 90%;
+              max-width: 450px;
+              box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+              text-align: center; /* 🔥 Центровка текста в модалке */
+            }
+
+            .close {
+              float: right;
+              font-size: 28px;
+              cursor: pointer;
+            }
+
+            .booking-form {
+              display: flex;
+              flex-direction: column;
+              gap: 15px;
+              align-items: center; /* 🔥 Центрируем элементы формы */
+            }
+
+            .booking-form label {
+              width: 100%;
+              text-align: left; /* 🔥 Лейблы лучше оставить слева */
+            }
+
+            .booking-form input,
+            .booking-form textarea,
+            .booking-form select {
+              width: 100%;
+              padding: 10px;
+              font-size: 16px;
+              border-radius: 8px;
+              border: 1px solid #ccc;
+            }
+
+            .booking-send {
+              background: #0055a5;
+              color: #fff;
+              padding: 12px;
+              font-size: 18px;
+              border: none;
+              border-radius: 8px;
+              cursor: pointer;
+              width: 100%;
+            }
+
+            .booking-send:hover {
+              background: #003d7a;
+            }
+
+
+            /* 🔥 АДАПТИВНОСТЬ — улучшена */
+            @media (max-width: 480px) {
+
+              #booking {
+                padding: 25px 12px;
+              }
+
+              #booking h2 {
+                font-size: 22px;
+                margin-bottom: 12px;
+              }
+
+              .booking-box {
+                padding: 16px;
+                border-radius: 12px;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+              }
+
+              .booking-box p {
+                font-size: 15px;
+                line-height: 1.45;
+              }
+
+              .booking-btn {
+                width: 100%;
+                font-size: 16px;
+                padding: 10px;
+                margin-top: 12px;
+                border-radius: 8px;
+              }
+
+              .modal {
+                padding-top: 30px;
+              }
+
+              .modal-content {
+                width: 92%;
+                padding: 14px 16px;
+                border-radius: 12px;
+                box-shadow: 0 3px 14px rgba(0,0,0,0.15);
+              }
+
+              .close {
+                font-size: 24px;
+                margin-bottom: 5px;
+              }
+
+              .modal-content h3 {
+                font-size: 20px;
+                margin-bottom: 14px;
+              }
+
+              .booking-form {
+                gap: 10px;
+              }
+
+              .booking-form input,
+              .booking-form select,
+              .booking-form textarea {
+                padding: 9px;
+                font-size: 14px;
+                border-radius: 6px;
+              }
+
+              textarea {
+                min-height: 70px;
+              }
+
+              .booking-send {
+                font-size: 16px;
+                padding: 10px;
+                border-radius: 8px;
+                margin-top: 6px;
+              }
+            }
+
+            @media (max-width: 768px) {
+
+              #booking {
+                padding: 30px 15px;
+              }
+
+              .booking-box {
+                padding: 20px;
+              }
+
+              .booking-btn {
+                width: 100%;
+              }
+
+              .modal-content {
+                width: 90%;
+              }
+            }
+
+
+        </style>
+
+        <script>
+          function openBooking() {
+            document.getElementById("bookingModal").style.display = "block";
+          }
+
+          function closeBooking() {
+            document.getElementById("bookingModal").style.display = "none";
+          }
+
+          window.onclick = function(event) {
+            const modal = document.getElementById("bookingModal");
+            if (event.target === modal) modal.style.display = "none";
+          };
+        </script>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <section id="contacts" class="contacts-section">
+    <h2 class="contacts-title">КОНТАКТУЙТЕ З НАМИ</h2>
+    <p class="contacts-subtitle">Не забудьте записатися, щоб отримати найкращий сервіс!</p>
+   
+    <div class="contacts-info">
+    <div class="contact-box">
+        <div class="icon svg-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 
+                0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 
+                0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 
+                16H5V9h14v11zM7 11h5v5H7v-5z"/>
+            </svg>
+        </div>
+
+        <h3>Графік</h3>
+        <p>Вт–Сб: 10:00 – 20:00<br>Нд–Пн: вихідний</p>
+    </div>
+
+    <div class="contact-box">
+          <a href="https://www.google.com/maps?q=вул.+Краси+12,+Луцьк" target="_blank">
+              <div class="icon svg-icon">
+                  <svg viewBox="0 0 24 24">
+                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 
+                      0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+                  </svg>
+              </div>
+          </a>
+
+          <h3>Адреса</h3>
+          <p>вул. Краси 12, Луцьк</p>
+    </div>
+
+
+    <div class="contact-box">
+        <div class="icon svg-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 
+                1 0 011.05-.24c1.12.37 2.33.57 3.54.57a1 1 0 011 1V20a1 
+                1 0 01-1 1C10.4 21 3 13.6 3 4a1 1 0 011-1h3.5a1 
+                1 0 011 1c0 1.21.2 2.42.57 3.54a1 1 0 01-.25 1.05l-2.2 2.2z"/>
+            </svg>
+        </div>
+        <h3>Телефон</h3>
+        <p>+380 00 000 00 00</p>
+    </div>
+
+    <div class="contact-box">
+        <a href="https://instagram.com/nail_salon_beauty" target="_blank">
+            <div class="icon svg-icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 
+                    5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm5 
+                    5c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 
+                    2.24-5 5-5zm6.5-2.5a1.5 1.5 0 110 
+                    3 1.5 1.5 0 010-3z"/>
+                </svg>
+            </div>
+        </a>
+        <h3>Instagram</h3>
+        <p>@nail_salon_beauty</p>
+    </div>
+
+</div>
+
+    <div class="map-wrapper">
+      <iframe
+        width="600"
+        height="450"
+        style="border:0;"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58957.408304094475!2d25.213802572488905!3d50.742927545984216!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472599eba185965d%3A0xd25274a2228db86c!2z0JvRg9GG0LosINCS0L7Qu9GL0L3RgdC60LDRjyDQvtCx0LvQsNGB0YLRjA!5e0!3m2!1sru!2sua!4v1764876258876!5m2!1sru!2sua"></iframe>
+      </iframe>
+    </div>
+    
+</div>
+
+    
+</section>
+
+<style>
+  /* Контейнер под SVG иконку */
+.svg-icon {
+    width: 60px;
+    height: 60px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 12px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* SVG стиль */
+.svg-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #D86C82; /* розовый в стиле твоего сайта */
+    transition: 0.3s ease;
+}
+
+/* Анимация при наведении */
+.svg-icon:hover {
+    transform: scale(1.12);
+    box-shadow: 0 6px 16px rgba(216,108,130,0.45);
+}
+
+.svg-icon:hover svg {
+    fill: #ff7fa8;
+}
+.contacts-section {
+    width: 100vw;
+    max-width: 100%;
+    height: 620px;
+    padding: 40px 0;
+    text-align: center;
+    background: #F4D6D7;
+    color: #3A1F2D;
+    box-sizing: border-box;
+}
+
+.contacts-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.contacts-subtitle {
+    font-size: 16px;
+    margin-bottom: 25px;
+    color: #6A3A4A;
+}
+
+.map-wrapper {
+    width: 80%;
+    height: 320px;
+    margin: 0 auto 30px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 6px solid #D8A8A9;
+}
+
+.map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.contacts-info {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+}
+
+.contact-box {
+    text-align: center;
+}
+
+.contact-box .icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.contact-box h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+/* 🔥 АДАПТИВНІСТЬ — CONTACTS */
+
+/* --- Планшети --- */
+@media (max-width: 992px) {
+
+  .contacts-section {
+    height: auto;
+    padding: 40px 20px;
+  }
+
+  .contacts-info {
+    gap: 40px;
+  }
+
+  .map-wrapper {
+    width: 90%;
+    height: 300px;
+  }
+}
+
+/* --- Телефони (до 768px) --- */
+@media (max-width: 768px) {
+
+  .contacts-title {
+    font-size: 27px;
+  }
+
+  .contacts-subtitle {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+
+  .contacts-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .contact-box h3 {
+    font-size: 18px;
+  }
+
+  .contact-box .icon {
+    font-size: 28px;
+  }
+
+  .map-wrapper {
+    width: 95%;
+    height: 260px;
+  }
+}
+
+/* --- Маленькі телефони (до 480px) --- */
+@media (max-width: 480px) {
+
+  .contacts-title {
+    font-size: 24px;
+  }
+
+  .contacts-section {
+    padding: 30px 10px;
+  }
+
+  .contact-box p {
+    font-size: 14px;
+  }
+
+  .map-wrapper {
+    width: 100%;
+    height: 230px;
+    border-width: 4px;
+  }
+
+  footer {
+    font-size: 14px !important;
+    padding: 20px 10px !important;
+  }
+
+}
+</style>
+
+  <footer style="text-align:center;padding:28px 12px;background:linear-gradient(90deg,#f87c94,#fff5f7);margin-top:40px">© 2025 Манікюрний салон • Всі права захищено</footer>
+  
+
+
+
+
+
+
+
+
+
+
+
+<!--КНОПКА ВОЗРАЩЕНИЯ НА ВВЕРХ-->>
+<script>
+            const btn = document.getElementById("toTopBtn");
+
+            window.addEventListener("scroll", () => {
+              if (window.scrollY > 200) {
+                btn.classList.add("show");
+              } else {
+                btn.classList.remove("show");
+              }
+            });
+
+            btn.addEventListener("click", () => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+              });
+            });
+</script>
+
+
+
+
+
+
+
+  <script>
+
+
+
+    
+      // Parallax
+      track.querySelectorAll('.parallax').forEach(box=>{
+        box.addEventListener('mousemove',(e)=>{
+          const speed=box.dataset.speed;
+          const x=(window.innerWidth-e.pageX*speed)/200;
+          const y=(window.innerHeight-e.pageY*speed)/200;
+          box.querySelector('img').style.transform=`translate(${x}px,${y}px) scale(1.2)`;
+        });
+        box.addEventListener('mouseleave',()=>{
+          box.querySelector('img').style.transform='translate(0,0) scale(1)';
+        });
+      });
+
+      // Tilt
+      track.querySelectorAll('.slide').forEach(slide=>{
+        slide.addEventListener('mousemove',(e)=>{
+          const r=slide.getBoundingClientRect();
+          const x=e.clientX-r.left-r.width/2;
+          const y=e.clientY-r.top-r.height/2;
+          slide.style.transform=`rotateY(${x/40}deg) rotateX(${-y/40}deg) scale(1.03)`;
+        });
+        slide.addEventListener('mouseleave',()=>{
+          slide.style.transform='rotateY(0) rotateX(0) scale(1)';
+        });
+      });
+    // Scroll reveal
+    function handleReveal(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const top = el.getBoundingClientRect().top;
+        if(top < window.innerHeight - 80) el.classList.add('active');
+      });
+    }
+    window.addEventListener('scroll', handleReveal);
+    window.addEventListener('load', handleReveal);
+
+    // Back to top
+    const topBtn = document.getElementById('topBtn');
+    window.addEventListener('scroll', ()=>{ topBtn.style.display = window.scrollY > 420 ? 'flex' : 'none'; });
+    topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+
+
+  /* --- Swipe / Drag support --- */
+let startX = 0;
+let currentX = 0;
+let isDown = false;
+let dragOffset = 0;
+const trackEl = track;
+const sensitivity = 1.1;
+trackEl.addEventListener('touchstart', startDrag, { passive:true });
+trackEl.addEventListener('mousedown', startDrag);
+trackEl.addEventListener('touchmove', drag, { passive:true });
+trackEl.addEventListener('mousemove', drag);
+trackEl.addEventListener('touchend', endDrag);
+trackEl.addEventListener('mouseup', endDrag);
+trackEl.addEventListener('mouseleave', endDrag);
+function startDrag(e){ isDown = true; startX = getX(e); dragOffset = 0; trackEl.style.transition = 'none'; }
+function drag(e){ if(!isDown) return; currentX = getX(e); dragOffset = (currentX - startX) * sensitivity; trackEl.style.transform = `translateX(${ -slideWidth * index + dragOffset }px)`; }
+function endDrag(){ if(!isDown) return; isDown = false; if(dragOffset < -60){ btnRight.click(); } else if(dragOffset > 60){ btnLeft.click(); } else { trackEl.style.transition = 'transform .4s ease'; trackEl.style.transform = `translateX(${-slideWidth * index}px)`; }}
+function getX(e){ return e.touches ? e.touches[0].clientX : e.clientX; }
+</script>
+</body>
+
+
+
+
+
